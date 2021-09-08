@@ -5,7 +5,7 @@
 		_MainTex ("Texture", 2D) = "white" {}
 		//_DisplacementTex ("DisplacementTex", 2D) = "white" {}
 		//_WaterTex ("WaterTex", 2D) = "white" {}
-		//_MaskTex ("MaskTex", 2D) = "white" {}
+		_MaskTex ("MaskTex", 2D) = "white" {}
         _WaterColor ("WaterColor", Color) = (1, 1, 1, 1)
 		_BaseHeight ("BaseHeight", float) = 0.4
 		_Turbulence ("Turbulence", float) = 1
@@ -47,6 +47,9 @@
 
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
+            sampler2D _MaskTex;
+			float4 _MaskTex_ST;
+
             float4 _WaterColor;
 			float _BaseHeight;
 			fixed _Turbulence;
@@ -72,12 +75,13 @@
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
+                fixed4 mask = tex2D(_MaskTex, i.uv);
 				fixed4 waterCol = _WaterColor;
 				float waveHeight = wave(i.uv.x);
 				fixed isTexelAbove = step(waveHeight, i.uv.y);
 				fixed isTexelBelow = 1 - isTexelAbove;
                 fixed4 col = waterCol;
-                col.a = isTexelBelow;
+                col.a = isTexelBelow * mask.a;
                 return col;
 			}
 			ENDCG

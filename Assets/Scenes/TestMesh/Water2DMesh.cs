@@ -10,6 +10,8 @@ public class Water2DMesh : MonoBehaviour
 	public float x = 1f;
 	public float y = 1f;
 
+	public bool isRotate = false;
+	bool isRotating = false;
 	Vector3[] vertices;
 	Tweener tweener;
 
@@ -46,7 +48,8 @@ public class Water2DMesh : MonoBehaviour
 			//0     3
 		};
 
-		RotateMeshVertices();
+
+		
 	}
 
 	void RotateMeshVertices()
@@ -71,6 +74,11 @@ public class Water2DMesh : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if (isRotate && !isRotating)
+		{
+			isRotating = true;
+			RotateMeshVertices();
+		}
 	}
 
 }
