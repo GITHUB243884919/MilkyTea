@@ -81,7 +81,7 @@
 				fixed isTexelAbove = step(waveHeight, i.uv.y);
 				fixed isTexelBelow = 1 - isTexelAbove;
                 fixed4 col = waterCol;
-                col.a = isTexelBelow * mask.a;
+                col.a = isTexelBelow;
                 return col;
 			}
 			ENDCG

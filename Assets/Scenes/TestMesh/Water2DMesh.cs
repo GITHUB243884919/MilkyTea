@@ -10,6 +10,8 @@ public class Water2DMesh : MonoBehaviour
 	public float x = 1f;
 	public float y = 1f;
 
+	public Transform rotateCenter;
+
 	public bool isRotate = false;
 	bool isRotating = false;
 	Vector3[] vertices;
@@ -61,6 +63,8 @@ public class Water2DMesh : MonoBehaviour
 	{
 		Vector3 p1 = RotatePoint(new Vector3(0, 0, 0), new Vector3(0, y, 0), angle);
 		Vector3 p2 = RotatePoint(new Vector3(x, 0, 0), new Vector3(x, y, 0), angle);
+		//Vector3 p1 = RotatePoint(rotateCenter.position, new Vector3(0, y, 0), angle);
+		//Vector3 p2 = RotatePoint(rotateCenter.position, new Vector3(x, y, 0), angle);
 		vertices[1] = p1;
 		vertices[2] = p2;
 		mf.mesh.vertices = vertices;
